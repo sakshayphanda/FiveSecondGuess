@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "570290551413",
+    "firebase_url": "https://truth-or-dare-1fc73.firebaseio.com",
+    "project_id": "truth-or-dare-1fc73",
+    "storage_bucket": "truth-or-dare-1fc73.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:570290551413:android:e87b8ff025f5764f64d63c",
+        "android_client_info": {
+          "package_name": "com.androidmate.drinking.party.couples.dirty.truth.or.dare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "570290551413-tkthsaspajbmgf7ib8epp8q13vve1jrj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOxyRk9bOQhT3YLfUH89rAZY70khxivbU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "570290551413-tkthsaspajbmgf7ib8epp8q13vve1jrj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
