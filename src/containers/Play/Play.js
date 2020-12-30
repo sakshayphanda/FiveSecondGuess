@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Image, StatusBar, Text, View} from 'react-native';
-import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
 import {connect} from 'react-redux';
 import ActionButton from '../../components/ActionButton';
@@ -197,14 +197,14 @@ class Play extends Component {
         <View style={styles.Buttons}>
           <ActionButton
             style={{flex: 1, marginLeft: 30, marginRight: 10}}
-            title={translate('truth')}
+            title={translate('start')}
             onPress={() => this.toggle('Truth')}
           />
-          <ActionButton
+          {/* <ActionButton
             style={{flex: 1, marginRight: 30, marginLeft: 10}}
             title={translate('dare')}
             onPress={() => this.toggle('Dare')}
-          />
+          /> */}
         </View>
       </LinearGradient>
     );

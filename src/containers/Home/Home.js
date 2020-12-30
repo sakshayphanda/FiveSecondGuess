@@ -101,7 +101,7 @@ export class Home extends Component {
           style={styles.LogoContainer}>
           <View style={{elevation: 20, shadowColor: 'black'}}>
             {/* <Image style={{ width: 220, height: 220, borderRadius: 10 }} source={logo} /> */}
-            <Text style={styles.Title}>Truth Or Dare</Text>
+            <Text style={styles.Title}>Five Second Guess</Text>
           </View>
         </LinearGradient>
         <Modal
