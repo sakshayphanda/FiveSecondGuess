@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#ffffff80',
     borderRadius: 69,
-    elevation: 5,
     shadowOffset: {
       height: 3,
       width: 1,

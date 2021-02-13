@@ -14,6 +14,7 @@ import {getWordList_ROM} from '../utils/wordlist/wordlist_ROM';
 
 export const getWordListPerLanguage = (category, optionSelected, language) => {
   let words;
+  console.log(optionSelected, 'option selected');
   switch (language) {
     case 'en':
       words = getWordList_ENG(category)[optionSelected];

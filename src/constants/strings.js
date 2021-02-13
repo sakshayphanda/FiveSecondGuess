@@ -18,3 +18,7 @@ export const CATEGORY_FRIENDS = 'friends';
 export const UNLOCK_ALL = 'unlockAll';
 
 export const HOW_TO_PLAY = `Start reading the phrase by saying 'Never Have I ever ...' \n Every Player that has done what the card says must drink once`;
+
+export const STATE_START = 'STATE_START'
+export const STATE_LOADING = 'STATE_LOADING'
+export const STATE_GUESSED_IT = 'STATE_GUESSED_IT'

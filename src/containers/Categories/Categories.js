@@ -27,18 +27,6 @@ const free_categories = [
 
 const itemSkus = Platform.select({
   android: [
-    'dirty_category_iap',
-    'sexy_product_iap',
-    'couples_product_iap',
-    'flirty_category_iap',
-    'teens_category_iap',
-    'party_iap',
-    'family_iap',
-    'friends_iap',
-    'drinking_iap',
-    'unlock_all_subscription',
-    'unlock_all_iap',
-    'wtf_iap',
   ],
 });
 

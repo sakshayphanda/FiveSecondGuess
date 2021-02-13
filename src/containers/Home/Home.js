@@ -116,7 +116,7 @@ export class Home extends Component {
         />
 
         <View style={styles.Buttons}>
-          <View>
+          {/* <View>  
             <Picker
               selectedValue={language}
               style={{height: 50, width: 150, marginLeft: 'auto'}}
@@ -141,20 +141,20 @@ export class Home extends Component {
                 );
               })}
             </Picker>
-          </View>
+          </View> */}
           <ScrollView>
             <ActionButton
               style={{backgroundColor: colors.buttonPrimaryColor}}
               title={translate('play')}
               onPress={() => this.props.navigation.navigate('Play')}
             />
-            <ActionButton
+            {/* <ActionButton
               style={{backgroundColor: colors.buttonPrimaryColor}}
               title={translate('turnBased')}
               onPress={() => {
                 this.props.navigation.navigate('AddPlayers', {});
               }}
-            />
+            /> */}
             <ActionButton
               style={{backgroundColor: colors.buttonPrimaryColor}}
               title={translate('howToPlay')}
@@ -167,7 +167,7 @@ export class Home extends Component {
               title={translate('moreGames')}
               onPress={() => {
                 Linking.openURL(
-                  'https://play.google.com/store/apps/developer?id=Androidmate',
+                  'https://play.google.com/store/apps/dev?id=6907832444062712929',
                 );
               }}
             />

@@ -23,8 +23,10 @@ export const styles = StyleSheet.create({
     },
     Buttons: {
         flex: 1,
+        flexDirection: 'row',
         backgroundColor: 'white',
-        padding: 10,
-        justifyContent: 'center'
+        paddingTop: 30,
+        justifyContent: 'center',
+
     }
 })

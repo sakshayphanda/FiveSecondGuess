@@ -1,11 +1,12 @@
 import {
   CATEGORY_EMBARRASING,
   CATEGORY_ENTERTAINMENT,
+  CATEGORY_FUNNY,
 } from '../constants/strings';
 import {languages} from '../constants/languages.js';
 
 const initialState = {
-  category: CATEGORY_EMBARRASING,
+  category: CATEGORY_FUNNY,
   isShowingPaidCategories: true,
   language: 'en',
   systemLanguage: null,

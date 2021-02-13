@@ -13,19 +13,7 @@ class Card extends Component {
     render() {
       return (
         <View style={[styles.Card]}>
-          <View style={styles.CardOption}>
-              <Text
-                style={{
-                  color: this.props.gradient,
-                  fontSize: 30,
-                  fontWeight: 'bold',
-                  padding: 10,
-                  width: '100%',
-                  textAlign: 'center',
-                }}>
-                  {this.props.category}
-              </Text>
-          </View>
+      
           <View style={styles.CardSentence}>
               <ScrollView >
                   <Text
@@ -38,13 +26,7 @@ class Card extends Component {
                   </Text>
                   </ScrollView>
 
-                    {this.props.showSwipeText && <View style={styles.CardSwipeText}>
-            <Image
-                  style={{width: 55, height: 55, margin: 5}}
-                  source={Swipe}
-                />
-                <Text>Swipe to view next card</Text>
-          </View>}
+
           </View>
   
         
