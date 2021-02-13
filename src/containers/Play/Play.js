@@ -222,7 +222,7 @@ class Play extends Component {
   };
 
   render() {
-    const {gradient, currentTime, timeUp} = this.state;
+    const {gradient, currentTime, timeUp, isTimerStarted} = this.state;
     // const Banner = firebase.admob.Banner;
     // const AdRequest = firebase.admob.AdRequest;
     // const request = new AdRequest();
@@ -320,11 +320,11 @@ class Play extends Component {
               onPress={() => this.guessedItButton()}
             />
           </>
-          ): <ActionButton
+          ): (!isTimerStarted && <ActionButton
           style={{flex: 1, marginLeft: 30, marginRight: 10}}
           title={translate('start')}
           onPress={() => this.start()}
-        />}
+        />)}
         </View>
       </LinearGradient>
     );
