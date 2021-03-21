@@ -1,4 +1,4 @@
-package com.androidmate.drinking.party.couples.dirty.truth.or.dare;
+package com.lazytrunk.fivesecondrule;
 
 import com.facebook.react.ReactActivity;
 

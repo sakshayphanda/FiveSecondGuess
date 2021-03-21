@@ -47,9 +47,8 @@
   "close": "Close",
   "addPlayersError": "'Please add atleast 2 players to begin'",
   "howtoplay_1": "1. Gather Your Friends",
-  "howtoplay_2": "2. Choose Truth or Dare",
-  "howtoplay_3": "3. Read the card allowed",
-  "howtoplay_4": "4. If you chose Truth you have to honestly answer the question",
-  "howtoplay_5": "5. If you chose Dare you have do the task on the card",
-  "howtoplay_6": "6. Enjoy and no judgements ;D"
+  "howtoplay_2": "2. Read the Card",
+  "howtoplay_3": "3. Click on Start",
+  "howtoplay_4": "4. You have 5 second to answer the question/ do the thing that is mentioned",
+  "howtoplay_5": "5. Enjoy and no judgements ;D"
 }

@@ -18,10 +18,12 @@ import {
 } from '../../constants/strings';
 import {CountdownCircleTimer} from 'react-native-countdown-circle-timer';
 import Animated from 'react-native-reanimated';
+import Sound from 'react-native-sound';
 
 class Play extends Component {
   cardSwipeRef;
-
+  whoosh;
+  buzzerSound;
   state = {
     optionSelected: 'All',
     categoryName: '',
@@ -40,12 +42,61 @@ class Play extends Component {
     gameState: STATE_START,
     isTimerStarted: false,
     time: 5,
-    timeUp: false
+    timeUp: false,
   };
 
   componentDidMount() {
     this.cardSwipeRef = React.createRef();
     this.getCategoryDataFromCategory();
+
+    // Enable playback in silence mode
+    Sound.setCategory('Playback');
+    this.buzzerSound = new Sound('buzzer.mp3', Sound.MAIN_BUNDLE, (error) => {
+      if (error) {
+        console.log('failed to load the sound', error);
+        return;
+      }               
+    }
+    );
+    // Load the sound file 'whoosh.mp3' from the app bundle
+    // See notes below about preloading sounds within initialization code below.
+    this.whoosh = new Sound('music.mp3', Sound.MAIN_BUNDLE, (error) => {
+      if (error) {
+        console.log('failed to load the sound', error);
+        return;
+      }
+      // loaded successfully
+      console.log(
+        'duration in seconds: ' +
+          this.whoosh.getDuration() +
+          'number of channels: ' +
+          this.whoosh.getNumberOfChannels(),
+      );
+    });
+
+    this.whoosh.setVolume(1);
+
+    // Position the sound to the full right in a stereo field
+    this.whoosh.setPan(1);
+
+    // Loop indefinitely until stop() is called
+    this.whoosh.setNumberOfLoops(-1);
+
+    // Get properties of the player instance
+    console.log('volume: ' + this.whoosh.getVolume());
+    console.log('pan: ' + this.whoosh.getPan());
+    console.log('loops: ' + this.whoosh.getNumberOfLoops());
+
+    // Seek to a specific point in seconds
+    this.whoosh.setCurrentTime(2.5);
+
+    // Get the current playback point in seconds
+    this.whoosh.getCurrentTime((seconds) => console.log('at ' + seconds));
+
+    // Pause the sound
+    this.whoosh.pause();
+
+
   }
 
   componentDidUpdate(prevProps) {
@@ -69,10 +120,6 @@ class Play extends Component {
       return obj.category === this.props.store.category;
     });
     let wordlist = getWordListPerLanguage(category, optionSelected, language);
-    
-    console.log(category, optionSelected, language, wordlist);
-
-
     let size = wordlist.length;
     let randomPos = Math.floor(Math.random() * wordlist.length);
     let statement = wordlist[randomPos];
@@ -133,7 +180,6 @@ class Play extends Component {
   // Change Question to "Did you nailed it ?"
   // Show Guess it Button
   startTimer = () => {
-    let {timerRunning, currentTime} = this.state;
     if (this.interval == null) {
       this.setState(
         {
@@ -142,26 +188,9 @@ class Play extends Component {
           currentTime: 0,
           gameState: STATE_LOADING,
         },
-        () => {
-          console.log('Starting');
-          this.interval = setInterval(() => {
-            if (this.state.timerRunning && this.state.currentTime < 5) {
-              this.setState({
-                currentTime: this.state.currentTime + 1,
-              });
-            } else {
-              clearInterval(this.interval);
-              this.setState({
-                timerRunning: false,
-                gameState: STATE_GUESSED_IT,
-              });
-            }
-          }, 1000);
-        },
+        () => {},
       );
     } else {
-      clearInterval(this.interval);
-      this.interval = null;
       this.startTimer();
     }
   };
@@ -177,48 +206,72 @@ class Play extends Component {
 
   countdownComponent = () => {
     const {isTimerStarted, time} = this.state;
-    return isTimerStarted && (
-    <CountdownCircleTimer
-      isPlaying = {isTimerStarted}
-      duration={5}
-      strokeWidth={5}
-      
-      initialRemainingTime={time}
-      size={60}
-      onComplete= {() => {
-        this.setState({
-          isTimerStarted: false,
-          time: 5,
-          statement: 'Challenge successful?',
-          timeUp: true
-        })
-      }}
-      colors={[
-        ['#004777', 0.4],
-        ['#F7B801', 0.4],
-        ['#A30000', 0.2],
-      ]}>
-      {({remainingTime, animatedColor}) => (
-        <Animated.Text style={{color: 'white'}}>{remainingTime}</Animated.Text>
-      )}
-    </CountdownCircleTimer>
-  )};
+    return (
+      isTimerStarted && (
+        <CountdownCircleTimer
+          isPlaying={isTimerStarted}
+          duration={5}
+          strokeWidth={5}
+          initialRemainingTime={time}
+          size={60}
+          onComplete={() => {
+            this.setState({
+              isTimerStarted: false,
+              time: 5,
+              statement: 'Challenge successful?',
+              timeUp: true,
+            });
+            // Stop the sound and rewind to the beginning
+            this.whoosh.stop(() => {
+              this.buzzerSound.play((success) => {
+                if (success) {
+                  console.log('successfully finished playing buzzer');
+                } else {
+                  console.log('buzzer playback failed due to audio decoding errors');
+                }
+              });
+            }
+
+            );
+          }}
+          colors={[
+            ['#004777', 0.4],
+            ['#F7B801', 0.4],
+            ['#A30000', 0.2],
+          ]}>
+          {({remainingTime, animatedColor}) => (
+            <Animated.Text style={{color: 'white'}}>
+              {remainingTime}
+            </Animated.Text>
+          )}
+        </CountdownCircleTimer>
+      )
+    );
+  };
 
   // will be implemented in future
   guessedItButton = (state) => {
     this.cardSwipeRef.current._forceRightSwipe();
     this.setRandomWordFromList();
     this.setState({
-      timeUp: false
-    })
-  }
+      timeUp: false,
+    });
+  };
 
   start() {
     this.startTimer();
+    //Play the sound with an onEnd callback
+    this.whoosh.play((success) => {
+      if (success) {
+        console.log('successfully finished playing');
+      } else {
+        console.log('playback failed due to audio decoding errors');
+      }
+    });
   }
 
   showToast = () => {
-    ToastAndroid.show("More categories coming soon!", ToastAndroid.SHORT);
+    ToastAndroid.show('More categories coming soon!', ToastAndroid.SHORT);
   };
 
   render() {
@@ -245,11 +298,12 @@ class Play extends Component {
         /> */}
         <StatusBar hidden />
 
-        <View style={styles.topbar}>
+        {/* <View style={styles.topbar}>
           <TouchableOpacity
             onPress={() => {
               // this.props.navigation.navigate('Categories', {})
-              this.showToast()}}
+              this.showToast();
+            }}
             style={styles.category_option}>
             <View style={styles.category_content}>
               <Image
@@ -267,11 +321,9 @@ class Play extends Component {
               </Text>
             </View>
           </TouchableOpacity>
-        </View>
+        </View> */}
         <View style={styles.CardContainer}>
-          <View style={{height: 60}}>
-          {this.countdownComponent()}
-          </View>
+          <View style={{height: 60}}>{this.countdownComponent()}</View>
           <SwipeCards
             ref={this.cardSwipeRef}
             cards={this.state.wordlist}
@@ -296,10 +348,8 @@ class Play extends Component {
                 <Text>Refresh</Text>
               </View>
             )}
-            handleYup={() => {
-            }}
-            handleNope={() => {
-            }}
+            handleYup={() => {}}
+            handleNope={() => {}}
             handleMaybe={this.handleMaybe}
             hasMaybeAction={false}
             onClickHandler={() => {}}
@@ -310,21 +360,25 @@ class Play extends Component {
           {timeUp ? (
             <>
               <ActionButton
-              style={{flex: 1, marginLeft: 30, marginRight: 10}}
-              title={'Nailed it'}
-              onPress={() => this.guessedItButton()}
-            />
-            <ActionButton
-              style={{flex: 1, marginLeft: 30, marginRight: 10}}
-              title={'Failed it'}
-              onPress={() => this.guessedItButton()}
-            />
-          </>
-          ): (!isTimerStarted && <ActionButton
-          style={{flex: 1, marginLeft: 30, marginRight: 10}}
-          title={translate('start')}
-          onPress={() => this.start()}
-        />)}
+                style={{flex: 1, marginLeft: 20, marginRight: 10}}
+                title={'Nailed it'}
+                onPress={() => this.guessedItButton()}
+              />
+              <ActionButton
+                style={{flex: 1, marginLeft: 10, marginRight: 20}}
+                title={'Failed it'}
+                onPress={() => this.guessedItButton()}
+              />
+            </>
+          ) : (
+            !isTimerStarted && (
+              <ActionButton
+                style={{flex: 1, marginLeft: 30, marginRight: 30}}
+                title={translate('start')}
+                onPress={() => this.start()}
+              />
+            )
+          )}
         </View>
       </LinearGradient>
     );

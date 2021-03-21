@@ -1,34 +1,33 @@
 {
   "project_info": {
-    "project_number": "570290551413",
-    "firebase_url": "https://truth-or-dare-1fc73.firebaseio.com",
-    "project_id": "truth-or-dare-1fc73",
-    "storage_bucket": "truth-or-dare-1fc73.appspot.com"
+    "project_number": "1075241987977",
+    "project_id": "five-second-guess",
+    "storage_bucket": "five-second-guess.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:570290551413:android:e87b8ff025f5764f64d63c",
+        "mobilesdk_app_id": "1:1075241987977:android:fac530c71cd0e8bfa23b58",
         "android_client_info": {
-          "package_name": "com.androidmate.drinking.party.couples.dirty.truth.or.dare"
+          "package_name": "com.lazytrunk.fivesecondrule"
         }
       },
       "oauth_client": [
         {
-          "client_id": "570290551413-tkthsaspajbmgf7ib8epp8q13vve1jrj.apps.googleusercontent.com",
+          "client_id": "1075241987977-fauvo9cj60m3udo9grd6fka7jgm4fef9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAOxyRk9bOQhT3YLfUH89rAZY70khxivbU"
+          "current_key": "AIzaSyBMmpNurNjIoZilhfDfCg5PYs6qHdoBwfY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "570290551413-tkthsaspajbmgf7ib8epp8q13vve1jrj.apps.googleusercontent.com",
+              "client_id": "1075241987977-fauvo9cj60m3udo9grd6fka7jgm4fef9.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

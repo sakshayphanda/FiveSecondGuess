@@ -2,12 +2,10 @@ import React from 'react';
 import {
   View,
   Text,
-  TouchableOpacity,
   StyleSheet,
   Dimensions,
 } from 'react-native';
 import colors from '../../utils/colors';
-import {HOW_TO_PLAY} from '../../constants/strings';
 import ActionButton from '../ActionButton';
 import {translate} from '../../utils/Helper';
 const screenWidth = Dimensions.get('window').width;
@@ -82,7 +80,6 @@ export default function Modal({onPress, visible}) {
           <Text style={styles.text}>{translate('howtoplay_3')}</Text>
           <Text style={styles.text}>{translate('howtoplay_4')}</Text>
           <Text style={styles.text}>{translate('howtoplay_5')}</Text>
-          <Text style={styles.text}>{translate('howtoplay_6')}</Text>
         </View>
         <ActionButton
           title={translate('close')}
